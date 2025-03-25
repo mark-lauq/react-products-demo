@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import type { ProductPayload } from "./types";
 import Loading from "./Loading";
@@ -23,12 +24,16 @@ export default function Products() {
     queryFn,
     queryKey: [QUERY_KEY],
   });
-  const [productId, setProductId] = useState<number | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedProductId = searchParams.get('id');
+  const [productId, setProductId] = useState<string | null>(selectedProductId);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(!!selectedProductId);
 
-  const handleClick = (id: number) => {
+  const handleClick = (id: string) => {
     setProductId(id);
     setDrawerOpen(true);
+    router.push(`/?id=${id}`)
   };
 
   return isFetching ? (
@@ -41,7 +46,7 @@ export default function Products() {
             key={id}
             className="flex mb-4 p-4 items-center cursor-pointer hover:bg-gray-200"
             onClick={() => {
-              handleClick(id);
+              handleClick(String(id));
             }}
           >
             <Image

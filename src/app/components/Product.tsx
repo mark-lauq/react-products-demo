@@ -14,9 +14,9 @@ import Loading from "./Loading";
 import PriceCategory from "./PriceCategory";
 
 interface ProductProps {
-  id: number;
+  id: string;
   open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const QUERY_KEY = Symbol("PRODUCT");
@@ -45,9 +45,7 @@ export default function Product({ id, open, setOpen }: ProductProps) {
                   width={100}
                   height={100}
                 />
-                <DrawerTitle className="text-lg">
-                  {product.title}
-                </DrawerTitle>
+                <DrawerTitle className="text-lg">{product.title}</DrawerTitle>
                 <PriceCategory {...product} />
                 <DrawerDescription>{product.description}</DrawerDescription>
               </DrawerHeader>

@@ -54,6 +54,7 @@ function DrawerContent({
     <DrawerPortal data-slot="drawer-portal">
       <DrawerOverlay />
       <DrawerPrimitive.Content
+        aria-describedby={undefined}
         data-slot="drawer-content"
         className={cn(
           "group/drawer-content bg-background fixed z-50 flex h-auto flex-col",
@@ -65,6 +66,7 @@ function DrawerContent({
         )}
         {...props}
       >
+        <DrawerTitle />
         <div className="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
         {children}
       </DrawerPrimitive.Content>
