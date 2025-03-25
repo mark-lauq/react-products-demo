@@ -2,13 +2,14 @@
 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Products } from './components/products'
 
 const queryClient = new QueryClient();
 
 export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
-      Home
+      <Products />
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
