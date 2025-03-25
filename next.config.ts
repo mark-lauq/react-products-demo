@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: 'export',
   distDir: 'docs',
+  basePath: process.env.NODE_ENV === 'production' ?  '/react-products-demo' : '',
   env: {
     API_HOST: "https://api.escuelajs.co/api/v1",
   },
