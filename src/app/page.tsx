@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ErrorBoundary from "./components/ErrorBoundary";
-import Products from "@/app/components/Products";
+import Products from "./components/Products";
 
 const queryClient = new QueryClient();
 

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import type { ProductPayload } from "./types";
@@ -26,14 +25,14 @@ export default function Products() {
   });
   const router = useRouter();
   const searchParams = useSearchParams();
-  const selectedProductId = searchParams.get('id');
+  const selectedProductId = searchParams.get("id");
   const [productId, setProductId] = useState<string | null>(selectedProductId);
   const [drawerOpen, setDrawerOpen] = useState<boolean>(!!selectedProductId);
 
   const handleClick = (id: string) => {
     setProductId(id);
     setDrawerOpen(true);
-    router.push(`/?id=${id}`)
+    router.push(`/?id=${id}`);
   };
 
   return isFetching ? (
@@ -49,7 +48,7 @@ export default function Products() {
               handleClick(String(id));
             }}
           >
-            <Image
+            <img
               src={images?.[0]}
               alt="Product Image"
               className="mr-2"
@@ -63,7 +62,9 @@ export default function Products() {
           </li>
         ))}
       </ul>
-      {productId && <Product id={productId} open={drawerOpen} setOpen={setDrawerOpen} />}
+      {productId && (
+        <Product id={productId} open={drawerOpen} setOpen={setDrawerOpen} />
+      )}
     </>
   );
 }

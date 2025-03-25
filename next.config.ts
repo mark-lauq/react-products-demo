@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   env: {
     API_HOST: "https://api.escuelajs.co/api/v1",
   },

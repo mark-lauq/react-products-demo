@@ -1,5 +1,4 @@
 import type { Dispatch, SetStateAction } from "react";
-import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import {
   Drawer,
@@ -39,7 +38,7 @@ export default function Product({ id, open, setOpen }: ProductProps) {
           ) : (
             product && (
               <DrawerHeader className="flex items-center">
-                <Image
+                <img
                   src={product.images?.[0]}
                   alt="Product Image"
                   width={100}
