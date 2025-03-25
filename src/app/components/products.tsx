@@ -1,15 +1,10 @@
+import { useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-
-interface Product {
-  id: number;
-  title: string;
-  images: string[];
-  category: {
-    name: string;
-  };
-  price: number;
-}
+import type { ProductPayload } from "./types";
+import Loading from "./Loading";
+import Product from "./Product";
+import PriceCategory from "./PriceCategory";
 
 const QUERY_KEY = Symbol("PRODUCTS");
 const queryFn = async () => {
@@ -23,45 +18,47 @@ const queryFn = async () => {
   return await response.json();
 };
 
-export function Products() {
-  const { data: products, isFetching } = useQuery<Product[]>({
+export default function Products() {
+  const { data: products, isFetching } = useQuery<ProductPayload[]>({
     queryFn,
     queryKey: [QUERY_KEY],
   });
+  const [productId, setProductId] = useState<number | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  const handleClick = (id: number) => {
+    setProductId(id);
+    setDrawerOpen(true);
+  };
 
   return isFetching ? (
-    <div className="absolute inset-0 flex justify-center items-center font-normal text-xl">
-      Products loading ...
-    </div>
+    <Loading>Products loading ...</Loading>
   ) : (
-    <ul>
-      {products?.map(({ id, title, images, price, category }) => (
-        <li
-          key={id}
-          className="flex mb-4 p-4 items-center cursor-pointer hover:bg-gray-200"
-        >
-          <Image
-            src={images?.[0]}
-            alt="Product Image"
-            className="mr-2"
-            width={100}
-            height={100}
-          />
-          <section>
-            <header className="text-lg font-semibold">{title}</header>
-            <dl>
-              <div className="flex gap-1">
-                <dt className="font-medium">Price:</dt>
-                <dd>{price}</dd>
-              </div>
-              <div className="flex gap-1">
-                <dt className="font-medium">Category:</dt>
-                <dd>{category.name}</dd>
-              </div>
-            </dl>
-          </section>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {products?.map(({ id, title, images, price, category }) => (
+          <li
+            key={id}
+            className="flex mb-4 p-4 items-center cursor-pointer hover:bg-gray-200"
+            onClick={() => {
+              handleClick(id);
+            }}
+          >
+            <Image
+              src={images?.[0]}
+              alt="Product Image"
+              className="mr-2"
+              width={100}
+              height={100}
+            />
+            <section>
+              <header className="text-lg font-semibold">{title}</header>
+              <PriceCategory price={price} category={category} />
+            </section>
+          </li>
+        ))}
+      </ul>
+      {productId && <Product id={productId} open={drawerOpen} setOpen={setDrawerOpen} />}
+    </>
   );
 }

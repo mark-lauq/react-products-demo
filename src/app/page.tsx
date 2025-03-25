@@ -2,7 +2,7 @@
 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Products } from './components/products'
+import Products from "./components/Products";
 
 const queryClient = new QueryClient();
 
