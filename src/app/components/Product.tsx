@@ -26,7 +26,9 @@ export default function Product({ id, open, setOpen }: ProductProps) {
   const { data: product, isFetching } = useQuery<ProductPayload>({
     queryKey: [QUERY_KEY, id],
     queryFn: async () => {
-      const response = await fetch(`${process.env.API_HOST}/products/${id}`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_HOST}/products/${id}`,
+      );
       return await response.json();
     },
   });

@@ -14,7 +14,7 @@ const queryFn = async () => {
     limit: "10",
   }).toString();
   const response = await fetch(
-    `${process.env.API_HOST}/products?${querystring}`,
+    `${process.env.NEXT_PUBLIC_API_HOST}/products?${querystring}`,
   );
   return await response.json();
 };

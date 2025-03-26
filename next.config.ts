@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   env: {
-    API_HOST: "https://api.escuelajs.co/api/v1",
+    NEXT_PUBLIC_API_HOST: "https://api.escuelajs.co/api/v1",
   },
   images: {
     remotePatterns: [
