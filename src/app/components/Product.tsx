@@ -36,7 +36,7 @@ export default function Product({ id, open, setOpen }: ProductProps) {
 
   const handleOpenChange = (open: boolean) => {
     if (!open) {
-      router.push("/");
+      router.replace("/");
     }
 
     setOpen(open);

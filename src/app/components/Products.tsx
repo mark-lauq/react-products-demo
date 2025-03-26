@@ -33,7 +33,7 @@ export default function Products() {
   const handleClick = (id: string) => {
     setProductId(id);
     setDrawerOpen(true);
-    router.push(`/?id=${id}`);
+    router.replace(`/?id=${id}`);
   };
 
   return isFetching ? (
