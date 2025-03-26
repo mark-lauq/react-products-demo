@@ -1,5 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import {
   Drawer,
   DrawerContent,
@@ -28,9 +29,18 @@ export default function Product({ id, open, setOpen }: ProductProps) {
       return await response.json();
     },
   });
+  const router = useRouter();
+
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      router.push("/");
+    }
+
+    setOpen(open);
+  };
 
   return (
-    <Drawer direction="right" open={open} onOpenChange={setOpen}>
+    <Drawer direction="right" open={open} onOpenChange={handleOpenChange}>
       <DrawerPortal>
         <DrawerContent>
           {isFetching ? (
