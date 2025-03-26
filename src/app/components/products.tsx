@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import type { ProductPayload } from "./types";
 import Loading from "./Loading";
@@ -48,7 +49,7 @@ export default function Products() {
               handleClick(String(id));
             }}
           >
-            <img
+            <Image
               src={images?.[0]}
               alt="Product Image"
               className="mr-2"

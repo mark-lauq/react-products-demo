@@ -1,6 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   Drawer,
   DrawerContent,
@@ -48,7 +49,7 @@ export default function Product({ id, open, setOpen }: ProductProps) {
           ) : (
             product && (
               <DrawerHeader className="flex items-center">
-                <img
+                <Image
                   src={product.images?.[0]}
                   alt="Product Image"
                   width={100}
